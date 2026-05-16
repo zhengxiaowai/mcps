@@ -21,9 +21,10 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           PKG_NAME=$(echo "$TAG" | cut -d/ -f1)
           VERSION=$(echo "$TAG" | cut -d/ -f2)
+          DIR_NAME=$(echo "$PKG_NAME" | tr '-' '_')
           echo "name=$PKG_NAME" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "path=mcp_servers/$PKG_NAME" >> "$GITHUB_OUTPUT"
+          echo "path=mcp_servers/$DIR_NAME" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         uses: actions/setup-python@v5
