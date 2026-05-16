@@ -1,0 +1,43 @@
+name: Publish MCP to PyPI
+
+on:
+  push:
+    tags:
+      - "mcp-serverchan3/v*"
+      # 在这里添加更多 MCP 的发布 tag 模式：
+      # - "mcp-hello/v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract package name and version from tag
+        id: pkg
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          PKG_NAME=$(echo "$TAG" | cut -d/ -f1)
+          VERSION=$(echo "$TAG" | cut -d/ -f2)
+          echo "name=$PKG_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "path=mcp_servers/$PKG_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build
+        run: pip install build
+
+      - name: Build package
+        run: python -m build
+        working-directory: ${{ steps.pkg.outputs.path }}
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: ${{ steps.pkg.outputs.path }}/dist/
