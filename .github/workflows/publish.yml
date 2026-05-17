@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "mcp-serverchan3/v*"
+      - "mcp-serverchan-turbo/v*"
       # 在这里添加更多 MCP 的发布 tag 模式：
       # - "mcp-hello/v*"
 

@@ -1,0 +1,21 @@
+[project]
+name = "mcp-serverchan-turbo"
+version = "0.1.0"
+description = "ServerChan Turbo push notification MCP server"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = ["fastmcp>=2.0", "httpx", "loguru"]
+
+[project.urls]
+Homepage = "https://github.com/zhengxiaowai/mcps"
+
+[project.scripts]
+mcp-serverchan-turbo = "serverchan_turbo:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["serverchan_turbo"]

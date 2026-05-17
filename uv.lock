@@ -5,6 +5,7 @@ requires-python = ">=3.12"
 [manifest]
 members = [
     "mcp-hello",
+    "mcp-serverchan-turbo",
     "mcp-serverchan3",
     "mcps",
 ]
@@ -637,6 +638,23 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "fastmcp", specifier = ">=2.0" }]
+
+[[package]]
+name = "mcp-serverchan-turbo"
+version = "0.1.0"
+source = { editable = "mcp_servers/mcp_serverchan_turbo" }
+dependencies = [
+    { name = "fastmcp" },
+    { name = "httpx" },
+    { name = "loguru" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "fastmcp", specifier = ">=2.0" },
+    { name = "httpx" },
+    { name = "loguru" },
+]
 
 [[package]]
 name = "mcp-serverchan3"
